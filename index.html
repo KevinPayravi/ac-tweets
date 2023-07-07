@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Kevin Payravi</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <style>
+      :root {
+        --border: rgb(234, 234, 234);
+        --bg-primary: white;
+        --text-primary: rgb(35 35 35);
+        --text-secondary: rgb(31, 155, 240);
+      }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+          "Noto Color Emoji";
+      }
+      h1,
+      h2,
+      h4,
+      hr,
+      p {
+        margin: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      .tweet-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .tweet-author-image {
+        width: 48px;
+        height: 48px;
+        border-radius: 9999px;
+      }
+      .tweet-author-info {
+        margin-left: 1rem;
+      }
+      .tweet-author-name {
+        line-height: 1rem;
+        font-weight: 500;
+      }
+      .tweet-author-handler {
+        line-height: 1.8rem;
+        color: var(--text-secondary);
+      }
+
+      .tweet-content {
+        margin-top: 1rem;
+      }
+      .tweet-content a {
+        color: var(--text-secondary);
+      }
+      .tweet-content .emoji {
+        display: inline-block;
+        height: 1.2em;
+        width: 1.2em;
+        margin: 0 0.05em 0 0.1em;
+        vertical-align: -0.1em;
+      }
+
+      .tweet-media {
+        margin-top: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+      .tweet-summary-card-text {
+        border-top: 1px solid var(--border);
+        padding: 0.75rem;
+        font-size: 0.95rem;
+        color: var(--subtext-primary);
+      }
+      .tweet-summary-card-text span {
+        font-size: 0.9rem;
+      }
+      .tweet-summary-card-text h2 {
+        color: var(--text-primary);
+      }
+      .tweet-summary {
+        display: flex;
+      }
+      .tweet-summary img {
+        width: 130px;
+        height: 130px;
+      }
+      .tweet-summary > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-left: 1px solid var(--border);
+        border-top: 0px !important;
+      }
+
+      .tweet-image {
+        width: 100%;
+      }
+      .tweet-quoted .tweet {
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      .tweet {
+        width: 500px;
+        padding: 2rem;
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        background: var(--bg-primary);
+      }
+      .tweet-author {
+        display: flex;
+        align-items: center;
+      }
+      .tweet-author-title {
+        display: flex;
+        align-items: center;
+      }
+      .tweet-author-verified {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-left: 0.25rem;
+        color: var(--text-secondary);
+      }
+      .tweet-logo {
+        color: var(--text-secondary);
+      }
+
+      /* Customizations */
+      .tweet-info-favourite,
+      .tweet-info-favourite + span {
+        display: none;
+      }
+
+      .tweet {
+        width: 300px;
+      }
+
+      #tweet-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 390px);
+        grid-gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tweet-grid">
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Aaah! I don't know how I forgot such an important event—Festivale!
+          This year's party will be on the 20th, so be sure to check Nook's
+          Cranny and the Able sisters' shop for all your Festivale item needs
+          before then. Viva Festivale! I hope I'm not stepping on Pavé's toes...
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/Fn-F1IlXoAE5cOE.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>984</span>
+          <div class="tweet-info-date">3:00 PM · Feb 2, 2023</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Hello again! February sure is full of fun events, and who could forget
+          Groundhog Day in the US and Canada! I can't tell you whether the
+          groundhog will see its shadow, but I can tell you that you'll see some
+          fun Groundhog Day–related items from Nook Shopping. Happy almost
+          spring!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/Fn-F0RwWQAAK_OR.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>1,719</span>
+          <div class="tweet-info-date">3:00 PM · Feb 2, 2023</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Happy February! That sweet time of year is almost here! Nook Shopping
+          has limited-run Valentine's Day items you'll just love. Oh! And
+          Setsubun is on the 3rd, so be sure to check with Nook Shopping and the
+          Able sisters if you're looking for the perfect Setsubun item! Take
+          care!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/Fn48OfZWYAE5kw3.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>3,140</span>
+          <div class="tweet-info-date">3:00 PM · Feb 1, 2023</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Hello to all my friends in the southern hemisphere! I hope I'm not
+          bugging you, but your first Bug-Off of the year is today! It runs
+          until 6 PM, so good luck and bugspeed!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FnASvB1X0AEVxVM.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>1,736</span>
+          <div class="tweet-info-date">3:00 PM · Jan 21, 2023</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Hi, friends! The first Fishing Tourney of the new year is today from 9
+          AM to 6 PM. If you're looking to get in on the action, just drop C.J.
+          a line! Hee-hee! See what I did there? Maybe I should leave the jokes
+          to Mr. Nook. Anyway, you can find C.J. in the plaza. Have fun!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FmcPm-qXoAEefJ4.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>2,037</span>
+          <div class="tweet-info-date">3:00 PM · Jan 14, 2023</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Hello! How's your new year so far? If you're in the mood for a little
+          post-holiday shopping, right now Nook Shopping has fun and traditional
+          New Year's items from all around the world! They're only here for a
+          limited time, so I hope you get a chance to check them out!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FlovtUjXoAMppTm.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>2,927</span>
+          <div class="tweet-info-date">3:00 PM · Jan 4, 2023</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Happy New Year, everyone! I'm looking forward to another wonderful
+          year of helping all my island friends live their best lives. I hope
+          your new year is already off to a lovely start!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FlX2PZ5WIAA1SRy.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>17.7 K</span>
+          <div class="tweet-info-date">8:15 AM · Jan 1, 2023</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Happy New Year's Eve, everyone! The big Countdown event is tonight in
+          the plaza, and I hope to see you all there. I just know we have so
+          many more fun moments waiting for us in 2023, but let's celebrate 2022
+          one last time together!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FlVNU2xXEAAQ903.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>7,469</span>
+          <div class="tweet-info-date">7:57 PM · Dec 31, 2022</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Hi, everyone! If you're looking for fun ways to ring in the new year,
+          I hear that Nook Shopping is offering all kinds of neat items from
+          around the world right now. I'm personally looking forward to some New
+          Year's noodles. Yum! Get those orders in ASAP!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/Fk6ZaEzXoAEq9Pl.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>3,194</span>
+          <div class="tweet-info-date">3:00 PM · Dec 26, 2022</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Oh, I almost forgot... If you get some stockings from Jingle today,
+          you should hang them on your wall if you want to get a fun surprise
+          tomorrow! My stockings are ready to go... I can't wait to see what
+          I'll get in the morning!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FkwNFiPWIAcbBSG.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>2,376</span>
+          <div class="tweet-info-date">3:30 PM · Dec 24, 2022</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Happy Toy Day, everyone! I hope you get a chance to meet up with
+          Santa's helper Jingle today and join him in delivering gifts. He'll be
+          here all day long, so it's not too late to hop in and have some fun.
+          Say hi for me!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FkwGOHoXwAI6q4J.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>6,116</span>
+          <div class="tweet-info-date">3:00 PM · Dec 24, 2022</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Hi, all! Toy Day isn't here yet, but I'm excited about the new year
+          already...and Nook Shopping has some fun items to help you celebrate!
+          New Year's Eve items are available now through the end of the year,
+          and New Year's Day items are available now through January 5th.
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FklzDDmWAAEO65B.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>2,873</span>
+          <div class="tweet-info-date">3:00 PM · Dec 22, 2022</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Hello to all my friends in the southern hemisphere! I just wanted to
+          remind you that today is the final Bug-Off of the year. I hope you're
+          able to net some fun memories along with all of those bugs!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/FkMDFwRWAAU98hr.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>1,657</span>
+          <div class="tweet-info-date">3:00 PM · Dec 17, 2022</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          How are you doing today? I took a nice walk on the beach and saw
+          someone diving in the ocean!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/BJ7rXmaCYAEINj2.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>74</span>
+          <div class="tweet-info-date">8:55 PM · May 10, 2013</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Are you curious about our previous mayor, Tortimer? He moved to a
+          tropical island and relaxes all day! Here’s a pic!
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/BJwUUdtCYAE9R4Y.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>71</span>
+          <div class="tweet-info-date">3:59 PM · May 8, 2013</div>
+        </div>
+      </div>
+
+      <div class="tweet" data-style="">
+        <div class="tweet-header">
+          <div class="tweet-author">
+            <img
+              class="tweet-author-image"
+              src="https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_normal.jpg"
+            />
+            <div class="tweet-author-info">
+              <div class="tweet-author-title">
+                <p class="tweet-author-name">Isabelle</p>
+              </div>
+              <a
+                class="tweet-author-handler"
+                target="_blank"
+                href="https://twitter.com/animalcrossing"
+                >@animalcrossing
+              </a>
+            </div>
+          </div>
+          <svg
+            class="tweet-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mdi"
+            width="32"
+            height="32"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="tweet-content">
+          Hi, I’m Isabelle! I wrote a letter introducing myself to you.
+          <div class="tweet-media">
+            <img
+              loading="lazy"
+              style="width: 100%"
+              class="tweet-image"
+              src="https://pbs.twimg.com/media/BJmfqgiCcAAaaLF.jpg"
+            />
+          </div>
+        </div>
+
+        <div class="tweet-info">
+          <svg
+            class="tweet-info-favourite"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              class="fill-current"
+              d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.813-1.148 2.353-2.73 4.644-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.375-7.454 13.11-10.037 13.156H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.035 11.596 8.55 11.658 1.52-.062 8.55-5.917 8.55-11.658 0-2.267-1.822-4.255-3.902-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.015-.03-1.426-2.965-3.955-2.965z"
+            ></path>
+          </svg>
+          <span>172</span>
+          <div class="tweet-info-date">6:12 PM · May 6, 2013</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
